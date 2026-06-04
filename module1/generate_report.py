@@ -16,7 +16,7 @@ class _DefectReportPDF(FPDF):
     def header(self):
         self.set_font("Helvetica", "B", 9)
         self.set_text_color(130, 130, 130)
-        self.cell(0, 8, "Industrial Defect Detection — Automated Inspection Report", align="C")
+        self.cell(0, 8, "Industrial Defect Detection - Automated Inspection Report", align="C")
         self.ln(2)
         self.set_draw_color(210, 210, 210)
         self.line(10, self.get_y(), 200, self.get_y())
@@ -82,7 +82,7 @@ def generate_report(results, input_dir, output_dir, model_name="YOLOv11"):
         pdf.set_font("Helvetica", "B", 10)
         pdf.cell(60, 7, label + ":", border=0)
         pdf.set_font("Helvetica", "", 10)
-        pdf.multi_cell(0, 7, value, border=0)
+        pdf.cell(0, 7, value, border=0, ln=True)
 
     if class_counts:
         pdf.ln(4)

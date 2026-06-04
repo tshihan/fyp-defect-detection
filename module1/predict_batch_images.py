@@ -12,7 +12,8 @@ IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".bmp", ".tiff", ".tif"}
 
 def predict_batch(model_path, input_dir, conf, output_dir):
     input_dir = Path(input_dir)
-    output_dir = Path(output_dir)
+    run_id = datetime.now().strftime("%Y-%m-%d_%H%M%S")
+    output_dir = Path(output_dir) / run_id
     output_dir.mkdir(parents=True, exist_ok=True)
 
     image_paths = sorted(
@@ -26,6 +27,7 @@ def predict_batch(model_path, input_dir, conf, output_dir):
 
     model = YOLO(model_path)
     names = model.names
+    is_pcb = "pcb" in Path(model_path).stem.lower()
 
     print(f"\nProcessing {len(image_paths)} image(s)  |  model={model_path}  |  conf>={conf}\n")
     print(f"{'Image':<35} {'Defects':>7}  {'Classes Found'}")
@@ -34,11 +36,17 @@ def predict_batch(model_path, input_dir, conf, output_dir):
     all_results = []
     for img_path in image_paths:
         t0 = time.perf_counter()
-        result = model.predict(str(img_path), conf=conf, save=False, verbose=False)[0]
+        img = cv2.imread(str(img_path))
+        if is_pcb:
+            gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+            img_for_model = cv2.cvtColor(gray, cv2.COLOR_GRAY2BGR)
+        else:
+            img_for_model = img
+        result = model.predict(img_for_model, conf=conf, save=False, verbose=False)[0]
         elapsed = time.perf_counter() - t0
 
         out_path = output_dir / f"{img_path.stem}_detected{img_path.suffix}"
-        cv2.imwrite(str(out_path), result.plot())
+        cv2.imwrite(str(out_path), result.plot(img=img))
 
         detections = [
             {
