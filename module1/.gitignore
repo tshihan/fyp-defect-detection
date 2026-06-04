@@ -1,4 +1,4 @@
-# Model weights (large binaries — store on Google Drive / HuggingFace)
+# Model weights (large binaries)
 models/*.pt
 
 # Generated outputs (reproducible, no need to commit)
