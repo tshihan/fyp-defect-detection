@@ -69,7 +69,9 @@ python predict_batch_images.py --model models/steel_best.pt --input input_images
 Runs batch prediction and then generates a PDF report in one command.
 
 ```bash
-python run_inference_pipeline.py --model models/pcb_best.pt --input input_images/pcb --conf 0.5
+python run_inference_pipeline.py --model models/pcb_best.pt --input input_images/pcb --conf 0.7
+
+python run_inference_pipeline.py --model models/steel_best.pt --input input_images/steel --conf 0.3
 ```
 
 | Argument | Description | Default |

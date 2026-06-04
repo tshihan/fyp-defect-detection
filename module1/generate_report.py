@@ -149,7 +149,8 @@ def generate_report(results, input_dir, output_dir, model_name="YOLOv11"):
             pdf.cell(0, 6, "No defects detected above confidence threshold.", ln=True)
 
     ts = datetime.now().strftime("%Y%m%d_%H%M%S")
-    out_path = output_dir / f"DefectReport_{ts}.pdf"
+    prefix = "PCB" if "pcb" in model_name.lower() else "Steel"
+    out_path = output_dir / f"{prefix}_DefectReport_{ts}.pdf"
     pdf.output(str(out_path))
     print(f"PDF report saved → {out_path}")
     return str(out_path)
