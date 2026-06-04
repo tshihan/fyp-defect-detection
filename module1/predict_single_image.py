@@ -10,12 +10,18 @@ def predict_single(model_path, image_path, conf, output_dir):
     output_dir.mkdir(parents=True, exist_ok=True)
 
     model = YOLO(model_path)
-    results = model.predict(str(image_path), conf=conf, save=False, verbose=False)
+    img = cv2.imread(str(image_path))
+    if "pcb" in Path(model_path).stem.lower():
+        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        img_for_model = cv2.cvtColor(gray, cv2.COLOR_GRAY2BGR)
+    else:
+        img_for_model = img
+    results = model.predict(img_for_model, conf=conf, save=False, verbose=False)
 
     result = results[0]
     img_path = Path(image_path)
     out_path = output_dir / f"{img_path.stem}_detected{img_path.suffix}"
-    cv2.imwrite(str(out_path), result.plot())
+    cv2.imwrite(str(out_path), result.plot(img=img))
 
     detections = [
         {

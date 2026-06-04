@@ -44,10 +44,11 @@ def main():
 
     # ── Summary ─────────────────────────────────────────────────────────────────
     total_defects = sum(len(r["detections"]) for r in results)
+    run_dir = Path(results[0]["output_path"]).parent
     _banner("Pipeline complete")
     print(f"  Images processed : {len(results)}")
     print(f"  Defects found    : {total_defects}")
-    print(f"  Results JSON     : {args.output}/results.json")
+    print(f"  Results JSON     : {run_dir}/results.json")
     if report_path:
         print(f"  PDF report       : {report_path}")
     print("=" * 58)
