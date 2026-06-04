@@ -16,3 +16,5 @@ input_images/*
 __pycache__/
 *.pyc
 *.pyo
+
+.DS_Store
