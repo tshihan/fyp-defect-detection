@@ -1,0 +1,20 @@
+# Model weights (large binaries)
+models/*.pt
+
+# Generated outputs (reproducible, no need to commit)
+output_images/*
+!output_images/.gitkeep
+
+reports/*
+!reports/.gitkeep
+
+# Input images (datasets stored separately)
+input_images/*
+!input_images/.gitkeep
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+.DS_Store
