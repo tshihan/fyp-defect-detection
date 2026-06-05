@@ -406,25 +406,13 @@ st.markdown(
 )
 
 st.markdown(
-    '<span class="badge badge-gray">MODULE 3 — ACTIVE LEARNING & RETRAINING</span>',
+    '<span class="badge badge-gray">MODULE 3 — REPORT GENERATION</span>',
     unsafe_allow_html=True,
 )
 st.markdown(
     '<div class="coming-soon-box">'
-    "🚧 <strong>Coming Soon</strong> — Uncertainty sampling, incremental fine-tuning, "
-    "and model version management."
-    "</div>",
-    unsafe_allow_html=True,
-)
-
-st.markdown(
-    '<span class="badge badge-gray">MODULE 4 — REPORTING & ANALYTICS</span>',
-    unsafe_allow_html=True,
-)
-st.markdown(
-    '<div class="coming-soon-box">'
-    "🚧 <strong>Coming Soon</strong> — Detection trend analytics, annotator performance "
-    "metrics, and dashboard export."
+    "🚧 <strong>Coming Soon</strong> — Automated audit reports, detection logs, "
+    "bounding box exports, and model performance summaries."
     "</div>",
     unsafe_allow_html=True,
 )
