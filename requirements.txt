@@ -1,6 +1,9 @@
+# ── Root (Streamlit UI) ────────────────────────────────────────────────────────
+streamlit>=1.35.0
+
+# ── Module 1 (inference, conveyor, reporting) ──────────────────────────────────
 ultralytics>=8.3.0
 opencv-python>=4.9.0
 Pillow>=10.0.0
 fpdf2>=2.8.0
 numpy>=1.26.0
-streamlit>=1.35.0
