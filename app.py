@@ -172,6 +172,26 @@ with tab1:
         key="batch_uploader",
     )
 
+    # Show thumbnails for uploaded files (Streamlit's file_uploader shows a generic
+    # icon for files; display the actual images here so it's clear what was uploaded)
+    if uploaded_files:
+        preview_cols = 8
+        cols = st.columns(preview_cols, gap="small")
+        for i, uf in enumerate(uploaded_files):
+            try:
+                # UploadedFile behaves like a file-like object; open with PIL
+                img = Image.open(uf)
+                cols[i % preview_cols].image(img, caption=uf.name, width=120)
+            except Exception:
+                # Fall back to name if the preview fails for any reason
+                cols[i % preview_cols].write(uf.name)
+            finally:
+                # Reset stream position so the file can be read again later
+                try:
+                    uf.seek(0)
+                except Exception:
+                    pass
+
     run_batch = st.button("▶ Run Batch Inference", type="primary", key="run_batch")
 
     if run_batch:
@@ -311,7 +331,7 @@ with tab2:
                 else:
                     status_slot.success("🟢 PASS — No defects detected")
 
-                img_slot.image(annotated, caption=img_path.name, use_container_width=True)
+                img_slot.image(annotated, caption=img_path.name, width=500)
                 prog.progress((idx + 1) / len(image_paths))
                 time.sleep(delay)
 
